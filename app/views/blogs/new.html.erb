@@ -1,0 +1,25 @@
+<%= form_with(model: @blog, local: true) do |form| %>
+  <% if @blog.errors.any? %>
+  <!-- 上記@blog.errorsには、バリデーションエラーが発生した際のエラー情報がまとめて入っている。 -->
+    <div id="error_explanation">
+      <h2><%= @blog.errors.count %>件のエラーがあります。</h2>
+      <ul>
+
+      <% @blog.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="blog_title">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+  <div class="blog_title">
+    <%= form.label :content %>
+    <%= form.text_field :content %>
+  </div>
+  <!-- form_withメソッドはデフォルトで「HTTPメソッドがPOSTでURLがblogs」というリクエストを飛ばす。すると、blogsコントローラのcreateアクションが起動する。そのリクエストの飛ぶタイミングはsubmitボタンをクリックした時である。 -->
+  <%= form.submit %>
+<% end %>
